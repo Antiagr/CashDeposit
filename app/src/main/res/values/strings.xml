@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">CashDeposits</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string name="deposit_title_label">Вклад</string>
+    <string name="deposit_title_hint">Введите название вклада</string>
+    <string name="deposit_detail_label">Детали</string>
+    <string name="deposit_detail_currency">Валюта : </string>
+    <string name="deposit_detail_currency_stub">Рубль</string>
+    <string name="deposit_detail_summ">Сумма :</string>
+    <string name="deposit_detail_summ_stub">10 000</string>
+    <string name="deposit_detail_percent">Процент :</string>
+    <string name="deposit_detail_percent_stub">7% годовых</string>
+    <string name="deposit_button_save">Сохранить изменения</string>
+    <string name="deposit_detail_time">Срок :</string>
+    <string name="deposit_detail_time_stub">2 года</string>
+    <string name="deposit_detail_date">Дата :</string>
+    <string name="deposit_detail_date_stub">23.03.2018</string>
+    <string name="new_deposit">Новый депозит</string>
+    <string name="deposit_edit_summ_stub">Введите сумму вклада</string>
+    <string name="deposit_edit_percent_stub">Введите процент вклада</string>
+    <string name="deposit_edit_time_stub">Введите срок вклада</string>
+    <string name="deposit_edit_date_stub">Введите дату вклада</string>
+    <string name="choose_date">Выберете дату</string>
+    <string name="ready">Готово</string>
+    <string name="deposit_detail_bank">Банк :</string>
+    <string name="deposit_button_delete">Удалить вклад</string>
+    <string name="number">№</string>
+    <string name="deposit_table_date">Месяц</string>
+    <string name="deposit_table_summ">Сумма</string>
+    <string name="deposit_table_profit">Начислено</string>
+    <string name="fragment_usd">USD :</string>
+    <string name="fragment_eur">EUR :</string>
+    <string name="update_rate">update</string>
+    <string name="db_button">DB</string>
+    <string name="deposit_detail_rate">Курс к рублю : </string>
+    <string name="deposit_detail_bank_stub">Ноунейм</string>
+    <string name="open_schedule">Графики</string>
+    <string name="schedule_date">Дата</string>
+    <string name="schedule_bank">Банк</string>
+    <string name="schedule_currency">Валюта</string>
+    <string name="schedule_from_date">С : </string>
+    <string name="schedule_to_date">По : </string>
+    <string name="all_banks">Все банки</string>
+    <string name="all_currencies">Все валюты</string>
+
+</resources>
