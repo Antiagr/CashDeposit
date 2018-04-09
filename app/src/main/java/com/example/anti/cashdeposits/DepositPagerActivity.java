@@ -14,6 +14,7 @@ import com.example.anti.cashdeposits.data.Deposit;
 import java.util.List;
 import java.util.UUID;
 
+// Pager уже существующих вкладов
 public class DepositPagerActivity extends AppCompatActivity{
 
     private static final String EXTRA_DEPOSIT_ID = "com.example.anti.cashdeposits.deposit_id";

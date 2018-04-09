@@ -253,6 +253,7 @@ public class DepositScheduleFragment extends Fragment{
         }
     }
 
+    // Получаем данные с учетом выбранных дат
     private void setData(Date from, Date to){
         mWorkingProfits.clear();
         for (Profit profit : mProfits){
@@ -263,6 +264,7 @@ public class DepositScheduleFragment extends Fragment{
         setData();
     }
 
+    // Получаем данные для графика
     private void setData(){
         List<PieEntry> entries;
         if (isBank){
@@ -301,6 +303,8 @@ public class DepositScheduleFragment extends Fragment{
         mPieChart.highlightValue(null);
         mPieChart.invalidate();
     }
+
+    // Простая выборка по умолчанию. Включает в себя все существующие вклады
     private List<PieEntry> getDataSimple(){
         List<PieEntry> entries = new ArrayList<>();
         Map<UUID, Float> mSumms = new HashMap<>();
@@ -320,6 +324,7 @@ public class DepositScheduleFragment extends Fragment{
         return entries;
     }
 
+    // Получаем данные для выборке по банкам
     private List<PieEntry> getDataBank(){
         List<PieEntry> entries = new ArrayList<>();
         Map<UUID, Deposit> selectedDeposits = new HashMap<>();
@@ -348,6 +353,7 @@ public class DepositScheduleFragment extends Fragment{
         return entries;
     }
 
+    // Получаем выборку для выборке по валюте
     private List<PieEntry> getDataCurrency(){
         List<PieEntry> entries = new ArrayList<>();
         Map<UUID, Deposit> selectedDeposits = new HashMap<>();

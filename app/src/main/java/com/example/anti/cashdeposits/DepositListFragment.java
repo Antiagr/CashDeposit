@@ -23,6 +23,7 @@ import com.example.anti.cashdeposits.service.RateService;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+//Лист существующих вкладов
 public class DepositListFragment extends Fragment {
 
     private RecyclerView mDepositRecyclerView;
@@ -41,14 +42,15 @@ public class DepositListFragment extends Fragment {
         RateService.setServiceAlarm(getActivity(), true);
     }
 
+    //Меню сверху
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
-            case R.id.look_schedule :
+            case R.id.look_schedule : //Посмотреть график
                 Intent intent1 = DepositScheduleActivity.newIntent(getActivity());
                 startActivity(intent1);
                 return true;
-            case R.id.new_deposit :
+            case R.id.new_deposit : //Добавить новый вклад
                 Intent intent2 = DepositActivity.newIntent(getActivity());
                 startActivity(intent2);
                 return true;

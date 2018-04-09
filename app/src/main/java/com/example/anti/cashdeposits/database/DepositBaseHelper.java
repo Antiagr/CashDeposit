@@ -102,6 +102,7 @@ public class DepositBaseHelper extends SQLiteOpenHelper{
                 " ('" + randomUUID().toString() + "', 'Дочка ВТБ')," +
                 " ('" + randomUUID().toString() + "', 'ОбувайБанк')"
         );
+        // Генерируем входные данные по курсу валют за 2016 - по нашем время
         StringBuilder sb = new StringBuilder("insert into " + CurrencyDynamicTable.NAME + "(" +
                 CurrencyDynamicTable.Cols.CURRENCY_ID + ", " +
                 CurrencyDynamicTable.Cols.DATE + ", " +
@@ -148,6 +149,7 @@ public class DepositBaseHelper extends SQLiteOpenHelper{
 
     }
 
+    // Сторонная наработка для просмотра БД
     public ArrayList<Cursor> getData(String Query){
         //get writable database
         SQLiteDatabase sqlDB = this.getWritableDatabase();

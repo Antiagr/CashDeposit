@@ -47,6 +47,55 @@ public class DepositLab {
         mDatabase = new DepositBaseHelper(mContext).getWritableDatabase();
     }
 
+    private static ContentValues getDepositContentValues(Deposit deposit){
+        ContentValues values = new ContentValues();
+        values.put(DepositTable.Cols.UUID, deposit.getId().toString());
+        values.put(DepositTable.Cols.TITLE,  deposit.getTitle());
+        values.put(DepositTable.Cols.SUMM, deposit.getSumm());
+        values.put(DepositTable.Cols.CURRENCY_ID, deposit.getCurrencyId().toString());
+        values.put(DepositTable.Cols.DATE, sdf.format(deposit.getDate().getTime()).toString());
+        values.put(DepositTable.Cols.TIME, deposit.getTime());
+        values.put(DepositTable.Cols.PERCENTAGE, deposit.getPercentage());
+        values.put(DepositTable.Cols.BANK_ID, deposit.getBankId().toString());
+        values.put(DepositTable.Cols.INVESTOR_ID, deposit.getInvestorId().toString());
+        return values;
+    }
+
+    private static ContentValues getCurrencyValues(Currency currency){
+        ContentValues values = new ContentValues();
+        values.put(CurrencyDynamicTable.Cols.CURRENCY_ID, currency.getId().toString());
+        values.put(CurrencyDynamicTable.Cols.DATE, sdf.format(new Date()).toString());
+        values.put(CurrencyDynamicTable.Cols.RATE, currency.getRate());
+        return values;
+    }
+
+    private static ContentValues getDepositProfitContentValues(Profit profit){
+        ContentValues values = new ContentValues();
+        values.put(DepositProfitsTable.Cols.UUID, profit.getId().toString());
+        values.put(DepositProfitsTable.Cols.DEPOSIT_UUID, profit.getDepositId().toString());
+        values.put(DepositProfitsTable.Cols.DATE, sdf.format(profit.getDate().getTime()).toString());
+        values.put(DepositProfitsTable.Cols.VALUE, profit.getValue());
+        values.put(DepositProfitsTable.Cols.PROFIT, profit.getProfit());
+        values.put(DepositProfitsTable.Cols.MONTH_PROFIT, profit.getMonthProfit());
+        return values;
+    }
+
+    public void updateRate(){
+        List<Currency> currencies = getCurrencies();
+        updateRate(currencies);
+    }
+
+    public void updateRate(List<Currency> currencies){
+        ContentValues values = getCurrencyValues(currencies.get(0));
+        mDatabase.update(CurrencyDynamicTable.NAME, values,
+                CurrencyDynamicTable.Cols.CURRENCY_ID + " = ?",
+                new String[] {currencies.get(0).getId().toString()});
+        values = getCurrencyValues(currencies.get(1));
+        mDatabase.insert(CurrencyDynamicTable.NAME, null, values);
+        values = getCurrencyValues(currencies.get(2));
+        mDatabase.insert(CurrencyDynamicTable.NAME, null, values);
+    }
+
     public Deposit getDeposit(UUID id){
         final String query ="select a.*, b." + CurrencyTable.Cols.TITLE +", c." + CurrencyDynamicTable.Cols.RATE + ", d." + BankTable.Cols.TITLE + " from " + DepositTable.NAME + " a " +
                 "left outer join " + CurrencyTable.NAME + " b " +
@@ -76,22 +125,6 @@ public class DepositLab {
         ContentValues values = getDepositContentValues(deposit);
         mDatabase.update(DepositTable.NAME, values,
                 DepositTable.Cols.UUID + " = ?", new String[] { uuidString });
-    }
-
-    public void updateRate(){
-        List<Currency> currencies = getCurrencies();
-        updateRate(currencies);
-    }
-
-    public void updateRate(List<Currency> currencies){
-        ContentValues values = getCurrencyValues(currencies.get(0));
-        mDatabase.update(CurrencyDynamicTable.NAME, values,
-                CurrencyDynamicTable.Cols.CURRENCY_ID + " = ?",
-                new String[] {currencies.get(0).getId().toString()});
-        values = getCurrencyValues(currencies.get(1));
-        mDatabase.insert(CurrencyDynamicTable.NAME, null, values);
-        values = getCurrencyValues(currencies.get(2));
-        mDatabase.insert(CurrencyDynamicTable.NAME, null, values);
     }
 
     private DepositCursorWrapper queryDeposits(String whereClause, String[] whereArgs){
@@ -152,39 +185,6 @@ public class DepositLab {
         );
 
         return new ProfitCursorWrapper(cursor);
-    }
-
-    private static ContentValues getDepositContentValues(Deposit deposit){
-        ContentValues values = new ContentValues();
-        values.put(DepositTable.Cols.UUID, deposit.getId().toString());
-        values.put(DepositTable.Cols.TITLE,  deposit.getTitle());
-        values.put(DepositTable.Cols.SUMM, deposit.getSumm());
-        values.put(DepositTable.Cols.CURRENCY_ID, deposit.getCurrencyId().toString());
-        values.put(DepositTable.Cols.DATE, sdf.format(deposit.getDate().getTime()).toString());
-        values.put(DepositTable.Cols.TIME, deposit.getTime());
-        values.put(DepositTable.Cols.PERCENTAGE, deposit.getPercentage());
-        values.put(DepositTable.Cols.BANK_ID, deposit.getBankId().toString());
-        values.put(DepositTable.Cols.INVESTOR_ID, deposit.getInvestorId().toString());
-        return values;
-    }
-
-    private static ContentValues getCurrencyValues(Currency currency){
-        ContentValues values = new ContentValues();
-        values.put(CurrencyDynamicTable.Cols.CURRENCY_ID, currency.getId().toString());
-        values.put(CurrencyDynamicTable.Cols.DATE, sdf.format(new Date()).toString());
-        values.put(CurrencyDynamicTable.Cols.RATE, currency.getRate());
-        return values;
-    }
-
-    private static ContentValues getDepositProfitContentValues(Profit profit){
-        ContentValues values = new ContentValues();
-        values.put(DepositProfitsTable.Cols.UUID, profit.getId().toString());
-        values.put(DepositProfitsTable.Cols.DEPOSIT_UUID, profit.getDepositId().toString());
-        values.put(DepositProfitsTable.Cols.DATE, sdf.format(profit.getDate().getTime()).toString());
-        values.put(DepositProfitsTable.Cols.VALUE, profit.getValue());
-        values.put(DepositProfitsTable.Cols.PROFIT, profit.getProfit());
-        values.put(DepositProfitsTable.Cols.MONTH_PROFIT, profit.getMonthProfit());
-        return values;
     }
 
     public void addDeposit(Deposit deposit){

@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 
 import java.util.UUID;
 
+// TODO удалить
 public class MainActivity extends SingleFragmentActivity{
 
     private static final String EXTRA_DEPOSIT_ID = "com.example.anti.cashdeposits.deposit_id";

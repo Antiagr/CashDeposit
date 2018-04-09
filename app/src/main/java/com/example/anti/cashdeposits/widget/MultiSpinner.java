@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 
 import java.util.List;
 
+// Сторонний виджет - выпадающий список с множественным выбором
 public class MultiSpinner extends android.support.v7.widget.AppCompatSpinner implements
         DialogInterface.OnMultiChoiceClickListener, DialogInterface.OnCancelListener {
 

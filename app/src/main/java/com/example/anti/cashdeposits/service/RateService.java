@@ -22,6 +22,7 @@ public class RateService extends IntentService{
         return new Intent(context, RateService.class);
     }
 
+    // Установка периода запуска сервиса
     public static void setServiceAlarm(Context context, boolean isOn){
         Intent i = RateService.newIntent(context);
         PendingIntent pi = PendingIntent.getService(context, 0, i, 0);
@@ -42,7 +43,7 @@ public class RateService extends IntentService{
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-//        DepositLab depositLab = DepositLab.get(getApplicationContext());
+//        DepositLab depositLab = DepositLab.get(getApplicationContext()); TODO
 //        depositLab.updateRate();
         Log.i(TAG, "currency rates updated");
     }
